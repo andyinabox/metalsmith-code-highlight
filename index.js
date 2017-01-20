@@ -60,6 +60,7 @@ var highlightFile = function(html) {
   codeBlocks = container.querySelectorAll('code');
   for(i = 0, len = codeBlocks.length; i < len; i++) {
     codeBlock = codeBlocks[i];
+
     lang = getLanguage(codeBlock);
 
     if (lang) {
@@ -71,6 +72,9 @@ var highlightFile = function(html) {
         codeBlock.classList.add('lang-' + result.language);
       }
     }
+
+    // add `hljs` class to container
+    codeBlock.classList.add('hljs');
 
     codeBlock.innerHTML = result.value;
   }
