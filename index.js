@@ -41,7 +41,7 @@ var getDocType = function(html) {
  * @return {!string} New HTML with code highlighted
  */
 var highlightFile = function(html) {
-  var i, len, codeBlocks, codeBlock, container, lang, result, finalHtml,
+  var i, len, codeBlocks, codeBlock, inlineCode, container, lang, result, finalHtml,
       docType = getDocType(html);
 
   // Parse HTML into DOM.  If doctype present, load as entire html document
@@ -56,6 +56,8 @@ var highlightFile = function(html) {
 
     container.innerHTML = html;
   }
+
+
 
   codeBlocks = container.querySelectorAll('code');
   for(i = 0, len = codeBlocks.length; i < len; i++) {
@@ -78,6 +80,13 @@ var highlightFile = function(html) {
 
     codeBlock.innerHTML = result.value;
   }
+
+  // add special class for inline `<code>` blocks
+  inlineCode = container.querySelectorAll('*:not(pre) > code');
+  inlineCode.forEach(function(el) {
+    el.classList.add('hljs-inline');
+  });
+
 
   if (docType) {
     finalHtml = docType + '\n' + container.getElementsByTagName('html')[0]

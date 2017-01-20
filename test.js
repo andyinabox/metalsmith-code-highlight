@@ -36,18 +36,18 @@ var plugin = metalsmithCodeHighlight();
 plugin(files, {}, function(err) {
   assert.equal(
     files['code.html'].contents.toString(),
-    '<code class="lang-js hljs"><span class="hljs-comment">// Hi</span></code>'
+    '<code class="lang-js hljs hljs-inline"><span class="hljs-comment">// Hi</span></code>'
   );
 
   assert.equal(
     files['escape.html'].contents.toString(),
-    '<code class="lang-js hljs"><span class="hljs-literal">true</span> &amp;&amp; ' +
+    '<code class="lang-js hljs hljs-inline"><span class="hljs-literal">true</span> &amp;&amp; ' +
     '<span class="hljs-literal">false</span></code>'
   );
 
   assert.equal(
     files['double.html'].contents.toString(),
-    ('<p>Hello there.</p><p>Inline <code class="lang-js hljs">' +
+    ('<p>Hello there.</p><p>Inline <code class="lang-js hljs hljs-inline">' +
     '<span class="hljs-built_in">document</span>.all</code></p>' +
     '<pre><code class="lang-coffeescript hljs">\n' +
     '<span class="hljs-built_in">require</span> ' +
