@@ -3,13 +3,13 @@ var assert = require('assert'),
 
 var files = {
   'bogus.jpg': {
-    contents: new Buffer('<code class=lang-js>// Hi</code>')
+    contents: new Buffer('<pre><code class=lang-js>// Hi</code></pre>')
   },
   'escape.html': {
-    contents: new Buffer('<code class=lang-js>true && false</code>')
+    contents: new Buffer('<pre><code class=lang-js>true && false</code></pre>')
   },
   'code.html': {
-    contents: new Buffer('<code class=lang-js>// Hi</code>')
+    contents: new Buffer('<pre><code class=lang-js>// Hi</code></pre>')
   },
   'double.html': {
     contents: new Buffer(
@@ -36,19 +36,18 @@ var plugin = metalsmithCodeHighlight();
 plugin(files, {}, function(err) {
   assert.equal(
     files['code.html'].contents.toString(),
-    '<code class="lang-js hljs hljs-inline"><span class="hljs-comment">// Hi</span></code>'
+    '<pre><code class="lang-js hljs"><span class="hljs-comment">// Hi</span></code></pre>'
   );
 
   assert.equal(
     files['escape.html'].contents.toString(),
-    '<code class="lang-js hljs hljs-inline"><span class="hljs-literal">true</span> &amp;&amp; ' +
-    '<span class="hljs-literal">false</span></code>'
+    '<pre><code class="lang-js hljs"><span class="hljs-literal">true</span> &amp;&amp; ' +
+    '<span class="hljs-literal">false</span></code></pre>'
   );
 
   assert.equal(
     files['double.html'].contents.toString(),
-    ('<p>Hello there.</p><p>Inline <code class="lang-js hljs hljs-inline">' +
-    '<span class="hljs-built_in">document</span>.all</code></p>' +
+    ('<p>Hello there.</p><p>Inline <code class="lang-js">document.all</code></p>' +
     '<pre><code class="lang-coffeescript hljs">\n' +
     '<span class="hljs-built_in">require</span> ' +
     '<span class="hljs-string">"fs"</span>\n' +
@@ -69,7 +68,7 @@ plugin(files, {}, function(err) {
   // Don't touch non-HTML files
   assert.equal(
     files['bogus.jpg'].contents.toString(),
-    '<code class=lang-js>// Hi</code>'
+    '<pre><code class=lang-js>// Hi</code></pre>'
   );
 
   console.log("All tests passed");

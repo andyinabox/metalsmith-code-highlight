@@ -59,7 +59,8 @@ var highlightFile = function(html) {
 
 
 
-  codeBlocks = container.querySelectorAll('code');
+  codeBlocks = container.querySelectorAll('pre > code');
+
   for(i = 0, len = codeBlocks.length; i < len; i++) {
     codeBlock = codeBlocks[i];
 
@@ -80,13 +81,6 @@ var highlightFile = function(html) {
 
     codeBlock.innerHTML = result.value;
   }
-
-  // add special class for inline `<code>` blocks
-  inlineCode = container.querySelectorAll('*:not(pre) > code');
-  inlineCode.forEach(function(el) {
-    el.classList.add('hljs-inline');
-  });
-
 
   if (docType) {
     finalHtml = docType + '\n' + container.getElementsByTagName('html')[0]
